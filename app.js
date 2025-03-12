@@ -1,11 +1,11 @@
 /*O principal objetivo deste desafio é fortalecer suas habilidades em lógica de programação. 
 Aqui você deverá desenvolver a lógica para resolver o problema.*/
 let amigos = [];
+const mensagem = document.getElementById("mensagem");
 
 function adicionarAmigo() {
     const inputAmigo = document.getElementById("inputAmigo");
     let amigo = inputAmigo.value.trim();
-    const mensagem = document.getElementById("mensagem");
     if (amigo == ""){
         let mensagemErro = "Faltou escrever o nome do seu amigo ou amiga para prosseguir!";
         mensagem.textContent = mensagemErro; 
@@ -26,48 +26,57 @@ function atualizarLista() {
     for (let i = 0; i<amigos.length; i++){
         let novoAmigo = document.createElement("li");
         novoAmigo.textContent = amigos[i];
+        
         let botaoRemover = document.createElement("button");
         botaoRemover.className= "remover";
         botaoRemover.textContent = "Remover";
         botaoRemover.onclick = () => removerAmigo(i); 
+        
         let botaoEditar = document.createElement("button");
         botaoEditar.className= "editar";
         botaoEditar.textContent = "Editar";
         botaoEditar.onclick = () => editarAmigo(i);
+        
         novoAmigo.appendChild(botaoRemover); 
         novoAmigo.appendChild(botaoEditar); 
         listaAmigos.appendChild(novoAmigo);        
     }   
 } 
+
 function removerAmigo(i) {
     amigos.splice(i, 1);
     atualizarLista();
-    const mensagem = document.getElementById("mensagem");
     mensagem.textContent = "Amigo removido com sucesso!";
 }   
+
 function editarAmigo(i) {
     let amigoEditado = prompt("Edite o nome do seu amigo:");
-    if (amigoEditado.trim() !== "") {
-        amigos[i] = amigoEditado;
-        atualizarLista();
-        const mensagem = document.getElementById("mensagem");
-        mensagem.textContent = "Nome do seu amigo editado com sucesso!";
+    if (amigoEditado !== null) {
+        amigoEditado = amigoEditado.trim();
+        if (amigoEditado !== "") {
+            amigos[i] = amigoEditado;
+            atualizarLista();
+            mensagem.textContent = "Nome do seu amigo editado com sucesso!";
+    } else {
+        mensagem.textContent = "O nome do amigo não pode ser vazio.";
+        }
+    } else {
+        mensagem.textContent = "Edição cancelada.";
     }
 }
+
 function sortearAmigo(){
     if (amigos.length === 0){
-        let sortMensErro = "Você precisa cadastrar seus amigos primeiro!";
-        mensagem.textContent = sortMensErro; 
+        mensagem.textContent = "Você precisa cadastrar seus amigos primeiro!";
         resultado.innerHTML = "";
         return;
         } else {
-            let sorteado = amigos [Math.floor (Math.random () *amigos.length)];
-            let resultado = document.getElementById("resultado");
+            let indiceSorteado = Math.floor (Math.random () *amigos.length);
+            let sorteado = amigos[indiceSorteado];
+            let resultado = document.getElementById("sorteado");
             resultado.innerHTML = `Seu amigo secreto é: ${sorteado}`;
-            amigos.splice(sorteado, 1);
+            amigos.splice(indiceSorteado, 1);
             atualizarLista();
-            console.log (sorteado);
-            console.log (amigos);
             const imagemSorteio = document.getElementById("imagemSorteio");
             imagemSorteio.style.display = "block";
             launchConfetti();
