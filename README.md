@@ -104,14 +104,10 @@ Siga estas etapas para executar o projeto em sua máquina local:
 1.  **Clone o repositório:**
 
     ```bash
-    git clone https://github.com/[seu-usuario]/amigo-secreto.git 
+    git clone https://github.com/GiseleLima-AI/challenge-amigo-secreto-GL.git
     ```
-2.  **Navegue até o diretório do projeto:**
 
-    ```bash
-    cd amigo-secreto
-    ```
-3.  **Abra o arquivo `index.html` em seu navegador.**
+2.  **Abra o arquivo `index.html` em seu navegador.**
 
 ## Tecnologias Utilizadas
 
